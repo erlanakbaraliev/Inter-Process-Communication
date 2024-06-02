@@ -1,0 +1,17 @@
+Election. In Hungary there are several electoral districts. In each district there is an electoral 
+committee, which protects the legality of voting. The committee has got three members: a 
+president and two other people. Usually one of them are checking the identification documents 
+of the voters, the other one seals down the electoral paper. (The president will be the parent 
+process, the other two members will be child processes.) 
+a) The president waits for the signals of each of the children that they are ready for work. After 
+that, the president read from the command line argument the number of voters and 
+generate a random identification number for each of them. The presidents write the 
+numbers into an unnamed pipe and the first child process (checking member) has to read 
+them and write to the screen. 
+b) The checking member (1st process) checks the identification cards of the voters and in 20% 
+of the cases they are not good. The checking child send to the second child the identification 
+numbers and the „can vote”/”cannot vote” remark through a named pipe. The second child 
+reads the data and writes everything to the screen. 
+c) The person who can vote will get the electoral paper and votes. (A random number between 
+1..6). The second child writes the result of the voters to a message queue. The president 
+reads the message queue and writes everything to the screen. 
